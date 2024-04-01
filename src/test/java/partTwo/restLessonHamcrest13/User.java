@@ -1,8 +1,7 @@
 package partTwo.restLessonHamcrest13;
 
 import lombok.Data;
-import partTwo.restLessonHamcrest13.Note;
-import pojo.Role;
+import api.pojo.Role;
 
 import java.util.ArrayList;
 import java.util.List;

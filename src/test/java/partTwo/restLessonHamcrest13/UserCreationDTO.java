@@ -2,8 +2,7 @@ package partTwo.restLessonHamcrest13;
 
 import lombok.Getter;
 import lombok.Setter;
-import partTwo.restLessonHamcrest13.Note;
-import pojo.Role;
+import api.pojo.Role;
 
 import java.util.List;
 

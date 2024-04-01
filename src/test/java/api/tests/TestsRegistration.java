@@ -1,13 +1,13 @@
-package partTwo.restLesson15.tests;
+package api.tests;
 
+import api.steps.Steps;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
-import partTwo.restLesson15.objects.User;
-import partTwo.restLesson15.objects.UserCreationDTO;
-import partTwo.restLesson15.steps.Steps;
+import objects.User;
+import objects.UserCreationDTO;
 
 @DisplayName("Проверка регистрации")
 public class TestsRegistration {

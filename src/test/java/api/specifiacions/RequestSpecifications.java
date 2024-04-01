@@ -1,12 +1,12 @@
-package partTwo.restLesson15.specifiacions;
+package api.specifiacions;
 
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
-import partTwo.restLesson15.objects.UserCreationDTO;
+import objects.UserCreationDTO;
 
-import static partTwo.restLesson15.Properties.BASE_URI;
-import static partTwo.restLesson15.Properties.PATH_REGISTRATION;
+import static api.Properties.BASE_URI;
+import static api.Properties.PATH_REGISTRATION;
 
 public class RequestSpecifications {
 

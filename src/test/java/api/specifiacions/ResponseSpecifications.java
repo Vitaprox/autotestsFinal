@@ -1,4 +1,4 @@
-package partTwo.restLesson15.specifiacions;
+package api.specifiacions;
 
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.specification.ResponseSpecification;

@@ -1,4 +1,4 @@
-package partTwo.restLesson15;
+package api;
 
 public class Properties {
     public static final String BASE_URI = "http://172.24.120.5:8081/";

@@ -1,4 +1,4 @@
-package partTwo.restLesson15.objects;
+package objects;
 
 import lombok.Data;
 

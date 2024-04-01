@@ -3,7 +3,7 @@ package partTwo.restLessonJakson9;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import partTwo.restLessonPOJO8.Role;
-import pojo.User;
+import api.pojo.User;
 
 import java.io.File;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package partTwo.restLesson15.steps;
+package api.steps;
 
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
@@ -8,16 +8,16 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.path.json.JsonPath;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
-import partTwo.restLesson15.objects.NoteCreationDTO;
-import partTwo.restLesson15.objects.User;
-import partTwo.restLesson15.objects.UserCreationDTO;
+import objects.NoteCreationDTO;
+import objects.User;
+import objects.UserCreationDTO;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import static org.hamcrest.Matchers.equalTo;
-import static partTwo.restLesson15.Properties.*;
+import static api.Properties.*;
 
 public class Steps {
 

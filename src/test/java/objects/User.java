@@ -1,7 +1,7 @@
-package partTwo.restLesson15.objects;
+package objects;
 
 import lombok.Data;
-import pojo.Role;
+import api.pojo.Role;
 
 import java.util.ArrayList;
 import java.util.List;

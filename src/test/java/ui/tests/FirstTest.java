@@ -1,4 +1,4 @@
-package partOne.pageObject16.tests;
+package ui.tests;
 
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;

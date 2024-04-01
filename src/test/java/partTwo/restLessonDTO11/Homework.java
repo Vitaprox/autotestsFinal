@@ -2,8 +2,8 @@ package partTwo.restLessonDTO11;
 
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.Test;
-import pojo.UserCreationDTO;
-import pojo.User;
+import api.pojo.UserCreationDTO;
+import api.pojo.User;
 
 public class Homework {
 

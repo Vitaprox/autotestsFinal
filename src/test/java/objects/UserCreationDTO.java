@@ -1,9 +1,9 @@
-package partTwo.restLesson15.objects;
+package objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Getter;
-import pojo.Role;
+import api.pojo.Role;
 
 import java.util.List;
 

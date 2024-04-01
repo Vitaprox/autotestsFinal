@@ -1,15 +1,15 @@
-package partTwo.restLesson15.tests;
+package api.tests;
 
+import api.steps.Steps;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
-import partTwo.restLesson15.steps.DBSteps;
-import partTwo.restLesson15.objects.Note;
-import partTwo.restLesson15.objects.NoteCreationDTO;
-import partTwo.restLesson15.objects.User;
-import partTwo.restLesson15.steps.Steps;
+import api.steps.DBSteps;
+import objects.Note;
+import objects.NoteCreationDTO;
+import objects.User;
 
 import java.util.ArrayList;
 import java.util.List;

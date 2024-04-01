@@ -1,4 +1,4 @@
-package partTwo.restLesson15.steps;
+package api.steps;
 
 import java.sql.*;
 import java.util.ArrayList;
