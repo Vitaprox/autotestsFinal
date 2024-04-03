@@ -62,4 +62,24 @@ public class TestsRegistration {
         steps.postRegistrationFail("Login is required", requestSpecification, responseSpecification);
     }
 
+    @Test
+    @DisplayName(value = "Проверка регистрации только с почтой")
+    public void registrationOnlyWithEmailTest() {
+        userCreationDTO = userCreationDTO.builder().email(newUser.getEmail()).build();
+
+        requestSpecification = steps.createRequestSpecificationRegistration(userCreationDTO);
+        responseSpecification = steps.createResponseSpecificationRegistration(500);
+        steps.postRegistrationFailWithContainsMessages("Login is required", "Password is required", requestSpecification, responseSpecification);
+    }
+
+    @Test
+    @DisplayName(value = "Проверка регистрации со всеми пустыми полями")
+    public void registrationOnlyWithoutFieldsTest() {
+        userCreationDTO = userCreationDTO.builder().build();
+
+        requestSpecification = steps.createRequestSpecificationRegistration(userCreationDTO);
+        responseSpecification = steps.createResponseSpecificationRegistration(500);
+        steps.postRegistrationFailWithContainsMessages("Login is required", "Password is required", requestSpecification, responseSpecification);
+    }
+
 }

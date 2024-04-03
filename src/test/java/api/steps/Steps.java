@@ -16,8 +16,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.hamcrest.Matchers.equalTo;
 import static api.Properties.*;
+import static org.hamcrest.Matchers.*;
 
 public class Steps {
 
@@ -54,6 +54,20 @@ public class Steps {
         return response.get("access_token");
     }
 
+    public RequestSpecification createRequestSpecificationAuthorization(Map<String, String> formParams) {
+        return new RequestSpecBuilder()
+                .setBaseUri(BASE_URI)
+                .setBasePath(PATH_LOGIN)
+                .addFormParams(formParams)
+                .build();
+    }
+
+    public void getAuthorization(RequestSpecification requestSpecification, ResponseSpecification responseSpecification){
+        RestAssured.given(requestSpecification).log().all()
+                .get()
+                .then().log().all().spec(responseSpecification);
+    }
+
     public void putEditNote(RequestSpecification requestSpecification, ResponseSpecification responseSpecification) {
         RestAssured.given(requestSpecification).log().all()
                 .put()
@@ -73,6 +87,16 @@ public class Steps {
                 .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("registration_error_schema.json"))
                 .body("level", equalTo("ERROR"),
                         "message", equalTo(message));
+    }
+
+    public void postRegistrationFailWithContainsMessages(String message1, String message2, RequestSpecification requestSpecification, ResponseSpecification responseSpecification) {
+        RestAssured.given(requestSpecification).log().all()
+                .post()
+                .then().log().all().spec(responseSpecification)
+                .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("registration_error_schema.json"))
+                .body("level", equalTo("ERROR"),
+                        "message", containsString(message1),
+                        "message", containsString(message2));
     }
 
     public ResponseSpecification createResponseSpecificationRegistration(int status) {

@@ -14,6 +14,7 @@ import objects.User;
 import java.util.ArrayList;
 import java.util.List;
 
+@DisplayName("Проверка заметок")
 public class TestsNote {
 
     private Steps steps = new Steps();
