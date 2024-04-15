@@ -33,6 +33,9 @@ public class AuthorizationPage {
     @FindBy(xpath = "//div[@role='alert']//div[text()]")
     private WebElement errorMessage;
 
+    @FindBy(className = "form_auth_block_head_text")
+    private WebElement header;
+
     @FindBy(xpath = REGISTRATION_POPUP)
     private WebElement registrationPopup;
 
@@ -62,6 +65,10 @@ public class AuthorizationPage {
     }
 
 
+
+    public boolean headerIsDisplayed() {
+        return header.isDisplayed();
+    }
 
     public boolean errorMessageIdDisplayed() {
         return errorMessage.isDisplayed();
