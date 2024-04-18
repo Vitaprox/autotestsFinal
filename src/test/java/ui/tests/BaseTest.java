@@ -3,21 +3,28 @@ package ui.tests;
 import ui.pages.AuthorizationPage;
 import ui.pages.MainPage;
 import ui.steps.AuthorizationSteps;
+import ui.steps.CommonSteps;
 import ui.steps.DBSteps;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import ui.steps.MainSteps;
 
 import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BaseTest {
 
 //    public static AuthorizationPage authorizationPage;
+//    public static MainPage mainPage;
     public static AuthorizationSteps authorizationSteps;
-    public static MainPage mainPage;
+    public static MainSteps mainSteps;
     public static WebDriver driver;
     public static DBSteps dbSteps;
+    public static CommonSteps commonSteps;
+    public static Map<String, String> savedValues;
 
 
     @BeforeAll
@@ -25,11 +32,12 @@ public class BaseTest {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 //        authorizationPage = new AuthorizationPage(driver);
+//        mainPage = new MainPage(driver);
         authorizationSteps = new AuthorizationSteps();
-        mainPage = new MainPage(driver);
+        mainSteps = new MainSteps();
         dbSteps = new DBSteps();
-        dbSteps.deleteNotes(6);
-        dbSteps.addRandomNote(6);
+        commonSteps = new CommonSteps();
+        savedValues = new HashMap<>();
     }
 
     @AfterAll
