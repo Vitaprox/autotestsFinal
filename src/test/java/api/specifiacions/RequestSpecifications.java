@@ -5,8 +5,8 @@ import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import objects.UserCreationDTO;
 
-import static api.Properties.BASE_URI;
-import static api.Properties.PATH_REGISTRATION;
+import static data.Properties.BASE_URI;
+import static data.Properties.PATH_REGISTRATION;
 
 public class RequestSpecifications {
 

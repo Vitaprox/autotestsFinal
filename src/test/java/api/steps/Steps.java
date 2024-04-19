@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static api.Properties.*;
+import static data.Properties.*;
 import static org.hamcrest.Matchers.*;
 
 public class Steps {

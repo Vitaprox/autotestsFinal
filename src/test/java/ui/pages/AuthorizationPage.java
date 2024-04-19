@@ -4,18 +4,29 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
+
+import static data.Properties.BASE_URI;
 
 public class AuthorizationPage {
 
-    private final String REGISTRATION_POPUP = "//div[@class='modal-content'][.//div[@id ='register-modal-title' and" +
-            " text() = 'Регистрация']]";
+//    private final String REGISTRATION_POPUP = "//div[@class='modal-content'][.//div[@id ='register-modal-title' and" +
+//            " text() = 'Регистрация']]";
 
     private WebDriver driver;
-    private String urlPage = "http://172.24.120.5:8081/login";
+    private String urlPage = BASE_URI + "login";
+    private WebDriverWait wait;
+
+//    private static RegistrationBlock registrationBlock;
 
     public AuthorizationPage(WebDriver driver) {
         this.driver = driver;
+        this.wait = new WebDriverWait(driver,Duration.ofSeconds(10));
         PageFactory.initElements(driver, this);
+//        PageFactory.initElements(new HtmlElementDecorator(new HtmlElementLocatorFactory(driver)), this);
     }
 
     @FindBy(id = "login-input")
@@ -36,42 +47,13 @@ public class AuthorizationPage {
     @FindBy(className = "form_auth_block_head_text")
     private WebElement header;
 
-    @FindBy(xpath = REGISTRATION_POPUP)
-    private WebElement registrationPopup;
-
-    @FindBy(xpath = REGISTRATION_POPUP + "//input[@placeholder='Логин']")
-    private WebElement registrationLoginInput;
-
-    @FindBy(xpath = REGISTRATION_POPUP + "//input[@placeholder='Пароль']")
-    private WebElement registrationPasswordInput;
-
-    @FindBy(xpath = REGISTRATION_POPUP + "//label[text()='E-mail']/following::input")
-    private WebElement registrationEmailInput;
-
-    public void fillInRegistrationLogin(String text) {
-        registrationLoginInput.sendKeys(text);
-    }
-
-    public void fillInRegistrationPassword(String text) {
-        registrationPasswordInput.sendKeys(text);
-    }
-
-    public void fillInRegistrationEmail(String text) {
-        registrationEmailInput.sendKeys(text);
-    }
-
-    public boolean registrationPopupIsDisplayed() {
-        return registrationPopup.isDisplayed();
-    }
-
-
 
     public boolean headerIsDisplayed() {
         return header.isDisplayed();
     }
 
-    public boolean errorMessageIdDisplayed() {
-        return errorMessage.isDisplayed();
+    public void errorMessageShouldBeDisplayed() {
+        wait.until(ExpectedConditions.visibilityOfAllElements(errorMessage));
     }
 
     public String getTextErrorMessage() {
