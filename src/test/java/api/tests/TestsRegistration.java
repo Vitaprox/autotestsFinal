@@ -3,13 +3,13 @@ package api.tests;
 import api.steps.Steps;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 import objects.User;
 import objects.UserCreationDTO;
 
-@DisplayName("Проверка регистрации")
+@DisplayName("Проверка регистрации API")
 public class TestsRegistration {
 
     private Steps steps = new Steps();
@@ -19,7 +19,7 @@ public class TestsRegistration {
     private UserCreationDTO userCreationDTO;
     private User newUser;
 
-    @Before
+    @BeforeEach
     public void before(){
         newUser = new User().generateUser();
     }

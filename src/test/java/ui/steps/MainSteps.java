@@ -25,6 +25,11 @@ public class MainSteps {
         Assert.assertTrue(mainPage.notePopupIsDisplayed());
     }
 
+    @Step("Ждем, когда появится поп-ап заметки")
+    public void notePopupShouldBeDisplayed() {
+        mainPage.notePopupShouldBeDisplayed();
+    }
+
     @Step("Вводим текст в поле ввода Заголовок заметки")
     public void fillInNoteTitle(String text) {
         mainPage.fillInNoteTitle(text);

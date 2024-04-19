@@ -1,22 +1,17 @@
 package ui.tests;
 
 import io.qameta.allure.Description;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static data.Properties.STANDARD_PASSWORD;
 
+@DisplayName("Проверка авторизации UI")
 public class AuthorizationTests extends BaseTest{
 
-//    @Test
-//    public void authorizationWithValidLoginAndPassword() {
-//        authorizationSteps.openAuthorizationPage();
-//        authorizationSteps.fillInLogin("Dtest");
-//        authorizationSteps.fillInPassword("Dtest");
-//        authorizationSteps.clickLoginButton();
-//    }
 
     @Test
-    @Description("Проверка успешной авторизации")
+    @DisplayName(value = "Проверка успешной авторизации")
     public void checkValidAuthorization() {
         commonSteps.saveValueInMap("login", "DtestUser");
         dbSteps.createUserWithStandardPassword(commonSteps.getValueFromValueMap("login"));
@@ -29,7 +24,7 @@ public class AuthorizationTests extends BaseTest{
     }
 
     @Test
-    @Description("Проверка авторизации с несуществующим логином")
+    @DisplayName(value = "Проверка авторизации с несуществующим логином")
     public void checkAuthorizationWithInvalidLogin() {
         authorizationSteps.openAuthorizationPage();
         authorizationSteps.fillInLogin("DtestFakeLogin");
@@ -40,7 +35,7 @@ public class AuthorizationTests extends BaseTest{
     }
 
     @Test
-    @Description("Проверка авторизации с неправильным паролем")
+    @DisplayName(value = "Проверка авторизации с неправильным паролем")
     public void checkAuthorizationWithInvalidPassword() {
         commonSteps.saveValueInMap("login", "DtestUser");
         dbSteps.createUserWithStandardPassword(commonSteps.getValueFromValueMap("login"));
@@ -54,7 +49,7 @@ public class AuthorizationTests extends BaseTest{
     }
 
     @Test
-    @Description("Проверка авторизации без логина и пароля")
+    @DisplayName(value = "Проверка авторизации без логина и пароля")
     public void checkAuthorizationWithoutLoginAndPassword() {
         authorizationSteps.openAuthorizationPage();
         authorizationSteps.clickLoginButton();

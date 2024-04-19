@@ -114,6 +114,10 @@ public class MainPage {
         return notePopup.isDisplayed();
     }
 
+    public void notePopupShouldBeDisplayed() {
+        wait.until(ExpectedConditions.visibilityOf(notePopup));
+    }
+
     public void fillInNoteTitle(String text) {
         notePopupTitleField.sendKeys(text);
     }
@@ -151,7 +155,8 @@ public class MainPage {
     }
 
     private WebElement getNote(String noteTitle) {
-        return driver.findElement(By.xpath(NOTE_XPATH + "[.//p[text()='" + noteTitle + "']]"));
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(NOTE_XPATH +
+                "[.//p[text()='" + noteTitle + "']]")));
     }
 
     public boolean noteIsDisplayed(String noteTitle) {

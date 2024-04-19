@@ -5,15 +5,15 @@ import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import objects.User;
 import objects.UserCreationDTO;
-import org.junit.Before;
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@DisplayName("Проверка авторизации")
+@DisplayName("Проверка авторизации API")
 public class TestsAuthorization {
 
     private Steps steps = new Steps();
@@ -22,9 +22,10 @@ public class TestsAuthorization {
     private RequestSpecification requestSpecification;
     private User newUser;
 
-    @Before
+    @BeforeEach
     public void before(){
         newUser = new User().generateUser();
+        System.out.println(newUser);
         steps.registrationWithAllFields(newUser);
     }
 

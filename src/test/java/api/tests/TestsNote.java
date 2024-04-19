@@ -5,8 +5,8 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 import api.steps.DBSteps;
 import objects.Note;
@@ -16,7 +16,7 @@ import objects.User;
 import java.util.ArrayList;
 import java.util.List;
 
-@DisplayName("Проверка заметок")
+@DisplayName("Проверка заметок API")
 public class TestsNote {
 
     private Steps steps = new Steps();
@@ -28,7 +28,7 @@ public class TestsNote {
     private Note newNote;
     private String token;
 
-    @Before
+    @BeforeEach
     public void before(){
         newUser = new User().generateUser();
         newNote = new Note().generateNote();

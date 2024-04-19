@@ -1,25 +1,17 @@
 package ui.tests;
 
 import io.qameta.allure.Description;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
 
 import static data.Properties.STANDARD_PASSWORD;
 
+@DisplayName("Проверка главной страницы UI")
 public class MainTests extends BaseTest{
 
-//    @Test
-//    public void DBTest() {
-//
-//        authorizationSteps.openAuthorizationPage();
-//        authorizationSteps.fillInLogin("Dtest");
-//        authorizationSteps.fillInPassword("Dtest");
-//        authorizationSteps.clickLoginButton();
-//
-////    Assert.assertTrue("Заметка не отображается", mainPage.notesIsDisplayed());
-//    }
-
     @Test
-    @Description("Проверка создания заметки")
+    @DisplayName(value = "Проверка создания заметки")
     public void checkCreatedNote() {
         commonSteps.saveValueInMap("login", "DtestUser");
         commonSteps.saveValueInMap("title", "Заголовок1");
@@ -32,7 +24,7 @@ public class MainTests extends BaseTest{
         authorizationSteps.clickLoginButton();
         mainSteps.checkThatMainPageOpen();
         mainSteps.clickAddNoteButton();
-        mainSteps.checkThatNotePopupDisplayed();
+        mainSteps.notePopupShouldBeDisplayed();
         mainSteps.fillInNoteTitle(commonSteps.getValueFromValueMap("title"));
         mainSteps.fillInNoteContent(commonSteps.getValueFromValueMap("content"));
         mainSteps.clickSaveNoteButton();
@@ -45,7 +37,7 @@ public class MainTests extends BaseTest{
     }
 
     @Test
-    @Description("Проверка создания заметки без заголовка")
+    @DisplayName(value = "Проверка создания заметки без заголовка")
     public void checkCreatedNoteWithoutTitle() {
         commonSteps.saveValueInMap("login", "DtestUser");
         commonSteps.saveValueInMap("content", "Контент1");
@@ -57,7 +49,7 @@ public class MainTests extends BaseTest{
         authorizationSteps.clickLoginButton();
         mainSteps.checkThatMainPageOpen();
         mainSteps.clickAddNoteButton();
-        mainSteps.checkThatNotePopupDisplayed();
+        mainSteps.notePopupShouldBeDisplayed();
         mainSteps.fillInNoteContent(commonSteps.getValueFromValueMap("content"));
         mainSteps.clickSaveNoteButton();
         mainSteps.notePopupShouldNotBeVisible();
@@ -69,7 +61,7 @@ public class MainTests extends BaseTest{
     }
 
     @Test
-    @Description("Проверка создания заметки без содержания")
+    @DisplayName(value = "Проверка создания заметки без содержания")
     public void checkCreatedNoteWithoutContent() {
         commonSteps.saveValueInMap("login", "DtestUser");
         commonSteps.saveValueInMap("title", "Заголовок1");
@@ -81,7 +73,7 @@ public class MainTests extends BaseTest{
         authorizationSteps.clickLoginButton();
         mainSteps.checkThatMainPageOpen();
         mainSteps.clickAddNoteButton();
-        mainSteps.checkThatNotePopupDisplayed();
+        mainSteps.notePopupShouldBeDisplayed();
         mainSteps.fillInNoteTitle(commonSteps.getValueFromValueMap("title"));
         mainSteps.fillInNoteContent("Содержание...");
         mainSteps.clickSaveNoteButton();
@@ -93,7 +85,7 @@ public class MainTests extends BaseTest{
     }
 
     @Test
-    @Description("Проверка создания заметки без заголовка и содержания")
+    @DisplayName(value = "Проверка создания заметки без заголовка и содержания")
     public void checkCreatedNoteWithoutTitleAndContent() {
         commonSteps.saveValueInMap("login", "DtestUser");
         dbSteps.createUserWithStandardPassword(commonSteps.getValueFromValueMap("login"));
@@ -104,7 +96,7 @@ public class MainTests extends BaseTest{
         authorizationSteps.clickLoginButton();
         mainSteps.checkThatMainPageOpen();
         mainSteps.clickAddNoteButton();
-        mainSteps.checkThatNotePopupDisplayed();
+        mainSteps.notePopupShouldBeDisplayed();
         mainSteps.clickSaveNoteButton();
         mainSteps.dialogWindowShouldBeVisible();
         mainSteps.checkDialogWindowTitle("Сохранение");
@@ -114,7 +106,7 @@ public class MainTests extends BaseTest{
     }
 
     @Test
-    @Description("Проверка редактирования заметки")
+    @DisplayName(value = "Проверка редактирования заметки")
     public void checkEditNote() {
         commonSteps.saveValueInMap("login", "DtestUser");
         commonSteps.saveValueInMap("title", "Заголовок1");
@@ -132,7 +124,7 @@ public class MainTests extends BaseTest{
         mainSteps.checkThatMainPageOpen();
         mainSteps.checkThatNoteWithTitleDisplayed(commonSteps.getValueFromValueMap("title"));
         mainSteps.clickEditNoteButton(commonSteps.getValueFromValueMap("title"));
-        mainSteps.checkThatNotePopupDisplayed();
+        mainSteps.notePopupShouldBeDisplayed();
         mainSteps.checkPopupNoteTitle(commonSteps.getValueFromValueMap("title"));
         mainSteps.checkPopupNoteContent(commonSteps.getValueFromValueMap("content"));
         mainSteps.clearPopupNoteTitle();
@@ -149,7 +141,7 @@ public class MainTests extends BaseTest{
     }
 
     @Test
-    @Description("Проверка удаления заметки")
+    @DisplayName(value = "Проверка удаления заметки")
     public void checkDeleteNote() {
         commonSteps.saveValueInMap("login", "DtestUser");
         commonSteps.saveValueInMap("title", "Заголовок1");

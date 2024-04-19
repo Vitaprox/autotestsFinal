@@ -1,9 +1,7 @@
 package ui.blocks;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 //import org.openqa.selenium.internal.WrapsElement;
 
@@ -13,23 +11,42 @@ import ru.yandex.qatools.htmlelements.element.HtmlElement;
 //
 //
 //    @FindBy(xpath = ".//input[@placeholder='Логин']")
-//    private WebElement registrationLoginInput;
+//    private WebElement registrationLoginField;
 //
 //    @FindBy(xpath = ".//input[@placeholder='Пароль']")
-//    private WebElement registrationPasswordInput;
+//    private WebElement registrationPasswordField;
 //
 //    @FindBy(xpath = ".//label[text()='E-mail']/following::input")
-//    private WebElement registrationEmailInput;
+//    private WebElement registrationEmailField;
+//
+//    @FindBy(xpath = ".//button[@type='submit']")
+//    private WebElement registrationCreateButton;
 //
 //    public void fillInRegistrationLogin(String text) {
-//        registrationLoginInput.sendKeys(text);
+//        registrationLoginField.sendKeys(text);
 //    }
 //
 //    public void fillInRegistrationPassword(String text) {
-//        registrationPasswordInput.sendKeys(text);
+//        registrationPasswordField.sendKeys(text);
 //    }
 //
 //    public void fillInRegistrationEmail(String text) {
-//        registrationEmailInput.sendKeys(text);
+//        registrationEmailField.sendKeys(text);
+//    }
+//
+//    public void clickRegistrationCreateButton() {
+//        registrationCreateButton.click();
+//    }
+//
+//    public void getLoginFieldBorderColor() {
+//        registrationLoginField.getCssValue("border-color");
+//    }
+//
+//    public void getPasswordFieldBorderColor() {
+//        registrationPasswordField.getCssValue("border-color");
+//    }
+//
+//    public void getEmailFieldBorderColor() {
+//        registrationEmailField.getCssValue("border-color");
 //    }
 //}
