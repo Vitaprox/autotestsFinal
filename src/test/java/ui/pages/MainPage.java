@@ -16,7 +16,7 @@ import java.util.List;
 import static data.Properties.BASE_URI;
 import static data.Properties.IMPLICITLY_WAIT_SECOND;
 
-public class MainPage {
+public class MainPage extends BasePage{
 
     private WebDriver driver;
     private WebDriverWait wait;
@@ -105,9 +105,9 @@ public class MainPage {
     }
 
     public void notePopupShouldNotBeVisible() {
-        editImplicitlyWait(0);
+        editImplicitlyWait(0, driver);
         wait.until(ExpectedConditions.invisibilityOf(notePopup));
-        editImplicitlyWait(IMPLICITLY_WAIT_SECOND);
+        editImplicitlyWait(IMPLICITLY_WAIT_SECOND, driver);
     }
 
     public boolean notePopupIsDisplayed() {
@@ -194,9 +194,9 @@ public class MainPage {
     }
 
     public int getNotesCount() {
-        editImplicitlyWait(0);
+        editImplicitlyWait(0, driver);
         int count = driver.findElements(By.xpath(NOTE_XPATH)).size();
-        editImplicitlyWait(IMPLICITLY_WAIT_SECOND);
+        editImplicitlyWait(IMPLICITLY_WAIT_SECOND, driver);
         return count;
     }
 
@@ -204,15 +204,4 @@ public class MainPage {
         return logoutButton.isDisplayed();
     }
 
-    private void editImplicitlyWait(int second) {
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(second));
-    }
-
-    private void sleep(int millis) {
-        try {
-            Thread.sleep(millis);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }

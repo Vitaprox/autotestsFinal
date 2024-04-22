@@ -5,6 +5,7 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
@@ -33,6 +34,11 @@ public class TestsNote {
         newUser = new User().generateUser();
         newNote = new Note().generateNote();
         db.createUserWithStandardPassword(newUser.getLogin());
+    }
+
+    @AfterEach
+    public void after(){
+        db.fullDeleteUser(newUser.getLogin());
     }
 
     @Test

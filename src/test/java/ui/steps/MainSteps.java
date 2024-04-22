@@ -30,12 +30,12 @@ public class MainSteps {
         mainPage.notePopupShouldBeDisplayed();
     }
 
-    @Step("Вводим текст в поле ввода Заголовок заметки")
+    @Step("Вводим текст {text} в поле ввода Заголовок заметки")
     public void fillInNoteTitle(String text) {
         mainPage.fillInNoteTitle(text);
     }
 
-    @Step("Вводим текст в поле ввода Содержание заметки")
+    @Step("Вводим текст {text} в поле ввода Содержание заметки")
     public void fillInNoteContent(String text) {
         mainPage.fillInNoteContent(text);
     }
@@ -45,12 +45,12 @@ public class MainSteps {
         mainPage.clickSaveNoteButton();
     }
 
-    @Step("Проверяем, что заметка отображается")
+    @Step("Проверяем, что заметка с заголовком {noteTitle} отображается")
     public void checkThatNoteWithTitleDisplayed(String noteTitle) {
         Assert.assertTrue(mainPage.noteIsDisplayed(noteTitle));
     }
 
-    @Step("Проверяем, что заметка отображается")
+    @Step("Проверяем, что заметка с заголовком {noteTitle} отображается")
     public void checkThatNoteWithTitleDisplayedWithStaleException(String noteTitle) {
         Assert.assertTrue(mainPage.noteIsDisplayedIgnoringStaleException(noteTitle));
     }
@@ -60,27 +60,27 @@ public class MainSteps {
         mainPage.notePopupShouldNotBeVisible();
     }
 
-    @Step("Проверяем, контент в заметке")
+    @Step("Проверяем, что есть заметка с заголовком {noteTitle} и контентом {expectedContent}")
     public void checkContentNoteWithTitle(String noteTitle, String expectedContent) {
         Assert.assertEquals(expectedContent, mainPage.getNoteContent(noteTitle));
     }
 
-    @Step("Проверяем, контент в заметке")
+    @Step("Проверяем, что есть заметка с заголовком {noteTitle} и контентом {expectedContent}")
     public void checkContentNoteWithTitleWithStaleException(String noteTitle, String expectedContent) {
         Assert.assertEquals(expectedContent, mainPage.getNoteContentIgnoringStaleException(noteTitle));
     }
 
-    @Step("Нажимаем кнопку Изменить у заметки")
+    @Step("Нажимаем кнопку Изменить у заметки с заголовком {noteTitle}")
     public void clickEditNoteButton(String noteTitle) {
         mainPage.clickEditNoteButton(noteTitle);
     }
 
-    @Step("Проверяем заголовок, в поп-апе заметки")
+    @Step("Проверяем, что в поп-апе заметки заголовок {expectedTitle}")
     public void checkPopupNoteTitle(String expectedTitle) {
         Assert.assertEquals(expectedTitle, mainPage.getPopupTitleText());
     }
 
-    @Step("Проверяем текст содержания, в поп-апе заметки")
+    @Step("Проверяем, что в поп-апе заметки текст содержания {expectedContent}")
     public void checkPopupNoteContent(String expectedContent) {
         Assert.assertEquals(expectedContent, mainPage.getPopupContentText());
     }
@@ -100,12 +100,12 @@ public class MainSteps {
         Assert.assertTrue(mainPage.dialogWindowDisplayed());
     }
 
-    @Step("Проверяем заголовок диалогового окна")
+    @Step("Проверяем, что в заголовке диалогового окна текст {expectedTitle}")
     public void checkDialogWindowTitle(String expectedTitle) {
         Assert.assertEquals(expectedTitle, mainPage.getDialogWindowTitleText());
     }
 
-    @Step("Проверяем текст диалогового окна")
+    @Step("Проверяем, что в диалоговом окне текст {expectedText}")
     public void checkDialogWindowText(String expectedText) {
         Assert.assertEquals(expectedText, mainPage.getDialogWindowMessageText());
     }
@@ -115,7 +115,7 @@ public class MainSteps {
         mainPage.dialogWindowShouldBeVisible();
     }
 
-    @Step("Нажимаем на кнопку удалить заметку")
+    @Step("Нажимаем на кнопку удалить заметку с заголовком {noteTitle}")
     public void clickDeleteButton(String noteTitle) {
         mainPage.clickDeleteNoteButton(noteTitle);
     }
@@ -125,9 +125,8 @@ public class MainSteps {
         mainPage.clickDialogWindowAcceptButton();
     }
 
-    @Step("Проверяем количество заметок")
+    @Step("Проверяем, что количество заметок {expectedCount}")
     public void checkNotesCount(int expectedCount) {
-        System.out.println(mainPage.getNotesCount());
         Assert.assertEquals(expectedCount, mainPage.getNotesCount());
     }
 

@@ -114,16 +114,6 @@ public class Steps {
                 .build();
     }
 
-    public void registrationWithAllFields(User newUser) {
-        UserCreationDTO userCreationDTO = UserCreationDTO.builder().login(newUser.getLogin())
-                .password(newUser.getPassword())
-                .email(newUser.getEmail())
-                .roles(newUser.getRoles())
-                .build();
-
-        postRegistration(createRequestSpecificationRegistration(userCreationDTO), createResponseSpecificationRegistration(201));
-    }
-
     public RequestSpecification createRequestSpecificationDeleteNote(int noteId, String token, String login) {
         return new RequestSpecBuilder()
                 .addHeader("Authorization", "Bearer " + token)

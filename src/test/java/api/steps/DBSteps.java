@@ -1,5 +1,8 @@
 package api.steps;
 
+import io.qameta.allure.Step;
+import org.junit.Assert;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +12,7 @@ public class DBSteps {
     private String url = "jdbc:postgresql://172.24.120.5:5432/postgres";
     private String login = "root";
     private String password = "root";
-    private int userId;
+//    private int userId;
     private int randomNumber = 400 + (int) (Math.random() * 10000);
     private String randomNoteTitle = "Title" + randomNumber;
     private String randomNoteText = "Text" + randomNumber;
@@ -33,15 +36,44 @@ public class DBSteps {
         return id;
     }
 
-    public void createUserWithStandardPassword(String login) {
-        userId = getMaxId("users") + 1;
-        executeUpdate("INSERT INTO nfaut.users" +
-                "(id, login, password)" +
-                "VALUES(" + userId + ", '" + login + "', '$2a$10$iJM3uo1MxeVD4qq92yoBpOG3WqHDqyWGth9jb4mhlOK1oqnv20ARq');");
-        setUserRole(2);
+    private boolean userIsExist(String userLogin) {
+        boolean flag = false;
+        createConnectionAndStatement(url, login, password);
+        try {
+            ResultSet result = statement.executeQuery("SELECT * FROM nfaut.users WHERE login = '" + userLogin + "';");
+            flag = result.next();
+            result.close();
+            closeConnectionAndStatement();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return flag;
     }
 
-    public void setUserRole(int role) {
+    @Step("Удаляем пользователя {login} из БД, если он существует")
+    public void deleteUserIfItExist(String login) {
+        if(userIsExist(login)) {
+            fullDeleteUser(login);
+        }
+    }
+
+    public int createUserWithStandardPassword(String login) {
+        return createUserWithStandardPassword(login, "");
+    }
+
+    public int createUserWithStandardPassword(String login, String email) {
+        deleteUserIfItExist(login);
+        int userId = getMaxId("users") + 1;
+        executeUpdate("INSERT INTO nfaut.users" +
+                "(id, login, password, email)" +
+                "VALUES(" + userId + ", '" + login + "', '$2a$10$iJM3uo1MxeVD4qq92yoBpOG3WqHDqyWGth9jb4mhlOK1oqnv20ARq', '"
+                + email + "');");
+        setUserRole(2, userId);
+        return getUserId(login);
+    }
+
+    public void setUserRole(int role, int userId) {
         executeUpdate("INSERT INTO nfaut.users_roles" +
                 "(id, user_id, role_id)" +
                 "VALUES(nextval('nfaut.users_roles_s'::regclass), " + userId + ", " + role + ");");
@@ -50,13 +82,32 @@ public class DBSteps {
 
 
     public void addRandomNote(int userId) {
+        addNote(userId, randomNoteTitle, randomNoteText);
+    }
+
+    public void addRandomNote(String userLogin) {
+        int userId = getUserId(userLogin);
+        addRandomNote(userId);
+    }
+
+    public void addNote(int userId, String title, String content) {
         int noteId = getMaxId("notes") + 1;
         executeUpdate("INSERT INTO nfaut.notes (id, user_id, name, content, priority, archive_flg) VALUES(" +
-                noteId + ", " + userId + ", '" + randomNoteTitle + "', '" + randomNoteText + "', 1, false);");
+                noteId + ", " + userId + ", '" + title + "', '" + content + "', 1, false);");
+    }
+
+    public void addNote(String userLogin, String title, String content) {
+        int userId = getUserId(userLogin);
+        addNote(userId, title, content);
     }
 
     public void deleteNotes(int userId) {
         executeUpdate("DELETE FROM nfaut.notes WHERE user_id=" + userId + ";");
+    }
+
+    public void deleteNotes(String userLogin) {
+        int userId = getUserId(userLogin);
+        deleteNotes(userId);
     }
 
 
@@ -74,6 +125,11 @@ public class DBSteps {
         }
 
         return id;
+    }
+
+    public int getLastNoteId(String userLogin) {
+        int userId = getUserId(userLogin);
+        return getLastNoteId(userId);
     }
 
     public int getUserId(String userLogin) {
@@ -110,6 +166,71 @@ public class DBSteps {
         }
 
         return fields;
+    }
+
+    private String getUserEmail(String userLogin) {
+        String email;
+        createConnectionAndStatement(url, login, password);
+        try {
+            ResultSet result = statement.executeQuery("SELECT email FROM nfaut.users WHERE login = '" + userLogin + "';");
+            result.next();
+            email = result.getString("email");
+            result.close();
+            closeConnectionAndStatement();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return email;
+    }
+
+    private int getUsersCount(String userLogin) {
+        int count;
+        createConnectionAndStatement(url, login, password);
+        try {
+            ResultSet result = statement.executeQuery("select COUNT(*) from nfaut.users where login = '" + userLogin + "';");
+            result.next();
+            count = result.getInt("count");
+            result.close();
+            closeConnectionAndStatement();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return count;
+    }
+
+    @Step("Проверка, что в БД количество записей равно {expectedCount} с логином {login}")
+    public void checkUsersCount(int expectedCount, String login) {
+        int time = 0;
+        while (getUsersCount(login) == 0 && time < 1000) {
+            try {
+                Thread.sleep(500);
+                time += 500;
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        int actualCount = getUsersCount(login);
+        Assert.assertEquals(expectedCount, actualCount);
+    }
+
+    @Step("Проверка, что в БД у пользователя {login} email равен {expectedEmail}")
+    public void checkUserEmail(String login, String expectedEmail) {
+        String actualEmail = getUserEmail(login);
+        Assert.assertEquals(expectedEmail, actualEmail);
+    }
+
+
+    public void fullDeleteUser(int userId) {
+        executeUpdate("DELETE FROM nfaut.users_roles WHERE user_id=" + userId + ";");
+        executeUpdate("DELETE FROM nfaut.users WHERE id=" + userId + ";");
+        deleteNotes(userId);
+    }
+
+    public void fullDeleteUser(String userLogin) {
+        int userId = getUserId(userLogin);
+        fullDeleteUser(userId);
     }
 
     private void executeUpdate(String SQL) {

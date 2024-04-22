@@ -1,5 +1,6 @@
 package api.tests;
 
+import api.steps.DBSteps;
 import api.steps.Steps;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
@@ -13,6 +14,7 @@ import objects.UserCreationDTO;
 public class TestsRegistration {
 
     private Steps steps = new Steps();
+    private DBSteps dbSteps = new DBSteps();
 
     private ResponseSpecification responseSpecification;
     private RequestSpecification requestSpecification;
@@ -34,12 +36,22 @@ public class TestsRegistration {
         requestSpecification = steps.createRequestSpecificationRegistration(userCreationDTO);
         responseSpecification = steps.createResponseSpecificationRegistration(201);
         steps.postRegistration(requestSpecification, responseSpecification);
+        dbSteps.fullDeleteUser(newUser.getLogin());
     }
 
     @Test
     @DisplayName(value = "Проверка регистрации со всеми полями")
     public void registrationWithAllFieldsTest() {
-        steps.registrationWithAllFields(newUser);
+        UserCreationDTO userCreationDTO = UserCreationDTO.builder().login(newUser.getLogin())
+                .password(newUser.getPassword())
+                .email(newUser.getEmail())
+                .roles(newUser.getRoles())
+                .build();
+
+        requestSpecification = steps.createRequestSpecificationRegistration(userCreationDTO);
+        responseSpecification = steps.createResponseSpecificationRegistration(201);
+        steps.postRegistration(requestSpecification, responseSpecification);
+        dbSteps.fullDeleteUser(newUser.getLogin());
     }
 
     @Test

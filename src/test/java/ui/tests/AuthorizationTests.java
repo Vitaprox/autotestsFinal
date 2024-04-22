@@ -15,6 +15,7 @@ public class AuthorizationTests extends BaseTest{
     public void checkValidAuthorization() {
         commonSteps.saveValueInMap("login", "DtestUser");
         dbSteps.createUserWithStandardPassword(commonSteps.getValueFromValueMap("login"));
+
         authorizationSteps.openAuthorizationPage();
         authorizationSteps.fillInLogin(commonSteps.getValueFromValueMap("login"));
         authorizationSteps.fillInPassword(STANDARD_PASSWORD);

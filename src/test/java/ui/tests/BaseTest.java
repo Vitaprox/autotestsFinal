@@ -1,10 +1,8 @@
 package ui.tests;
 
-import ui.pages.AuthorizationPage;
-import ui.pages.MainPage;
 import ui.steps.AuthorizationSteps;
 import ui.steps.CommonSteps;
-import ui.steps.DBSteps;
+import api.steps.DBSteps;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.WebDriver;
