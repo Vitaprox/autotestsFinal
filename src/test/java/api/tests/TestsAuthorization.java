@@ -5,7 +5,6 @@ import api.steps.Steps;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import objects.User;
-import objects.UserCreationDTO;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;

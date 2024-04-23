@@ -9,7 +9,6 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import objects.NoteCreationDTO;
-import objects.User;
 import objects.UserCreationDTO;
 
 import java.util.ArrayList;

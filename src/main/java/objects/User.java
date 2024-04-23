@@ -1,7 +1,6 @@
 package objects;
 
 import lombok.Data;
-import api.pojo.Role;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,14 +13,13 @@ public class User {
     private String login;
     private String password;
     private String email;
-//    private List<Note> notes;
     private List<Role> roles;
 
     public User generateUser() {
         int numberGenerate =  100 + (int) (Math.random() * 10000);
 
         User newUser = new User();
-        newUser.setLogin("test_login" + numberGenerate);
+        newUser.setLogin("test_login10" + numberGenerate);
         newUser.setPassword("123");
         newUser.setEmail("text" + numberGenerate + "@login.ru");
         newUser.setDefaultRole();
@@ -53,33 +51,4 @@ public class User {
         }
     }
 
-//    public void setDefaultNote() {
-//        Note defaultNote = new Note();
-//        defaultNote.setName("NoteName");
-//        defaultNote.setContent("NoteCont");
-//        defaultNote.setColor("#d7aefb");
-//        defaultNote.setPriority(0);
-//
-//        List<Note> defaultListNote = new ArrayList<>();
-//        defaultListNote.add(defaultNote);
-//
-//        this.notes = defaultListNote;
-//    }
-//
-//    public void setNote(String noteName, String noteContent, String color, int priority) {
-//        Note note = new Note();
-//        note.setName(noteName);
-//        note.setContent(noteContent);
-//        note.setColor(color);
-//        note.setPriority(priority);
-//
-//        if (Objects.isNull(this.notes)) {
-//            List<Note> listNote = new ArrayList<>();
-//            listNote.add(note);
-//            this.notes = listNote;
-//        } else {
-//            this.notes.add(note);
-//        }
-//
-//    }
 }

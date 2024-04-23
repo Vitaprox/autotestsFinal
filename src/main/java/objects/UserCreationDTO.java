@@ -3,7 +3,6 @@ package objects;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Getter;
-import api.pojo.Role;
 
 import java.util.List;
 
