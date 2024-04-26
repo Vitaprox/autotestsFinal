@@ -1,5 +1,7 @@
 package ui.tests;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import ui.steps.AuthorizationSteps;
 import ui.steps.CommonSteps;
 import api.steps.DBSteps;
@@ -27,12 +29,26 @@ public class BaseTest {
     public static Map<String, String> savedValues;
 
 
-    @BeforeAll
-    public static void setUp() {
+//    @BeforeAll
+//    public static void setUp() {
+//        driver = new ChromeDriver();
+//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(IMPLICITLY_WAIT_SECOND));
+//        authorizationSteps = new AuthorizationSteps();
+//        mainSteps = new MainSteps();
+//        dbSteps = new DBSteps();
+//        commonSteps = new CommonSteps();
+//        savedValues = new HashMap<>();
+//    }
+//
+//    @AfterAll
+//    public static void tearDown() {
+//        driver.quit();
+//    }
+
+    @BeforeEach
+    public void setUp() {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(IMPLICITLY_WAIT_SECOND));
-//        authorizationPage = new AuthorizationPage(driver);
-//        mainPage = new MainPage(driver);
         authorizationSteps = new AuthorizationSteps();
         mainSteps = new MainSteps();
         dbSteps = new DBSteps();
@@ -40,8 +56,10 @@ public class BaseTest {
         savedValues = new HashMap<>();
     }
 
-    @AfterAll
-    public static void tearDown() {
+    @AfterEach
+    public void tearDown() {
         driver.quit();
     }
+
+
 }
