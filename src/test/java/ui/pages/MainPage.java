@@ -167,7 +167,6 @@ public class MainPage extends BasePage{
         try {
             return noteIsDisplayed(noteTitle);
         } catch (StaleElementReferenceException e) {
-            System.out.println("stale");
             return noteIsDisplayed(noteTitle);
         }
     }
@@ -176,7 +175,6 @@ public class MainPage extends BasePage{
         try {
             return getNoteContent(noteTitle);
         } catch (StaleElementReferenceException e) {
-            System.out.println("stale");
             return getNoteContent(noteTitle);
         }
     }
