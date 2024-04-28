@@ -21,13 +21,11 @@ public class AuthorizationPage extends BasePage{
     private String urlPage = BASE_URI + "login";
     private WebDriverWait wait;
 
-//    private static RegistrationBlock registrationBlock;
 
     public AuthorizationPage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver,Duration.ofSeconds(10));
         PageFactory.initElements(driver, this);
-//        PageFactory.initElements(new HtmlElementDecorator(new HtmlElementLocatorFactory(driver)), this);
     }
 
     @FindBy(id = "login-input")
@@ -47,8 +45,6 @@ public class AuthorizationPage extends BasePage{
 
     @FindBy(className = "form_auth_block_head_text")
     private WebElement header;
-
-
 
     @FindBy(xpath = REGISTRATION_POPUP)
     private WebElement registrationPopup;
@@ -110,8 +106,6 @@ public class AuthorizationPage extends BasePage{
         wait.until(ExpectedConditions.invisibilityOf(registrationPopup));
         editImplicitlyWait(IMPLICITLY_WAIT_SECOND, driver);
     }
-
-
 
     public boolean headerIsDisplayed() {
         return header.isDisplayed();

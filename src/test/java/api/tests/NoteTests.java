@@ -1,13 +1,9 @@
 package api.tests;
 
-import api.steps.Steps;
-import io.restassured.specification.RequestSpecification;
-import io.restassured.specification.ResponseSpecification;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
-import api.steps.DBSteps;
 import objects.Note;
 import objects.NoteCreationDTO;
 import objects.User;
@@ -16,12 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @DisplayName("Проверка заметок API")
-public class TestsNote {
-
-    private Steps steps = new Steps();
-    DBSteps db = new DBSteps();
-    private ResponseSpecification responseSpecification;
-    private RequestSpecification requestSpecification;
+public class NoteTests extends BaseTests{
     private User newUser;
     private NoteCreationDTO noteCreationDTO;
     private Note newNote;
@@ -31,12 +22,12 @@ public class TestsNote {
     public void before(){
         newUser = new User().generateUser();
         newNote = new Note().generateNote();
-        db.createUserWithStandardPassword(newUser.getLogin());
+        dbSteps.createUserWithStandardPassword(newUser.getLogin());
     }
 
     @AfterEach
     public void after(){
-        db.fullDeleteUser(newUser.getLogin());
+        dbSteps.fullDeleteUser(newUser.getLogin());
     }
 
     @Test
@@ -60,9 +51,9 @@ public class TestsNote {
     @Test
     @DisplayName(value = "Проверка редактирования заметки")
     public void editNote() {
-        int userId = db.getUserId(newUser.getLogin());
-        db.addRandomNote(userId);
-        int noteId = db.getLastNoteId(userId);
+        int userId = dbSteps.getUserId(newUser.getLogin());
+        dbSteps.addRandomNote(userId);
+        int noteId = dbSteps.getLastNoteId(userId);
         int random = 100 + (int) (Math.random() * 1000);
         noteCreationDTO = NoteCreationDTO.builder()
                 .id(noteId)
@@ -86,10 +77,10 @@ public class TestsNote {
     @DisplayName(value = "Проверка архивирования заметки")
     public void archiveNote() {
 
-        int userId = db.getUserId(newUser.getLogin());
-        db.addRandomNote(userId);
-        int noteId = db.getLastNoteId(userId);
-        List<Object> fields = db.getNoteFields(noteId);
+        int userId = dbSteps.getUserId(newUser.getLogin());
+        dbSteps.addRandomNote(userId);
+        int noteId = dbSteps.getLastNoteId(userId);
+        List<Object> fields = dbSteps.getNoteFields(noteId);
 
         noteCreationDTO = NoteCreationDTO.builder()
                 .id(noteId)
@@ -113,9 +104,9 @@ public class TestsNote {
     @Test
     @DisplayName(value = "Проверка удаления заметки")
     public void deleteNote() {
-        int userId = db.getUserId(newUser.getLogin());
-        db.addRandomNote(userId);
-        int noteId = db.getLastNoteId(userId);
+        int userId = dbSteps.getUserId(newUser.getLogin());
+        dbSteps.addRandomNote(userId);
+        int noteId = dbSteps.getLastNoteId(userId);
 
         token = steps.getToken(newUser.getLogin(), newUser.getPassword());
 

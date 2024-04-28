@@ -29,8 +29,6 @@ public class AuthorizationSteps {
         authorizationPage.clickLoginButton();
     }
 
-
-
     @Step("Проверка, отображается ли заголовок. Ожидаемый результат: {expectedResult}")
     public void checkHeaderDisplayed(boolean expectedResult) {
         Assert.assertEquals(expectedResult, authorizationPage.headerIsDisplayed());

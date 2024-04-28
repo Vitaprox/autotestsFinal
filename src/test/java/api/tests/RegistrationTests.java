@@ -1,9 +1,5 @@
 package api.tests;
 
-import api.steps.DBSteps;
-import api.steps.Steps;
-import io.restassured.specification.RequestSpecification;
-import io.restassured.specification.ResponseSpecification;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
@@ -11,13 +7,8 @@ import objects.User;
 import objects.UserCreationDTO;
 
 @DisplayName("Проверка регистрации API")
-public class TestsRegistration {
+public class RegistrationTests extends BaseTests{
 
-    private Steps steps = new Steps();
-    private DBSteps dbSteps = new DBSteps();
-
-    private ResponseSpecification responseSpecification;
-    private RequestSpecification requestSpecification;
     private UserCreationDTO userCreationDTO;
     private User newUser;
 

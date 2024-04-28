@@ -1,9 +1,5 @@
 package api.tests;
 
-import api.steps.DBSteps;
-import api.steps.Steps;
-import io.restassured.specification.RequestSpecification;
-import io.restassured.specification.ResponseSpecification;
 import objects.User;
 
 import org.junit.jupiter.api.AfterEach;
@@ -15,14 +11,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 @DisplayName("Проверка авторизации API")
-public class TestsAuthorization {
+public class AuthorizationTests extends BaseTests{
 
-    private Steps steps = new Steps();
-    private DBSteps dbSteps = new DBSteps();
-    private ResponseSpecification responseSpecification;
-    private RequestSpecification requestSpecification;
     private User newUser;
-
 
     @BeforeEach
     public void before(){
