@@ -9,8 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-import static data.Properties.BASE_URI;
-import static data.Properties.IMPLICITLY_WAIT_SECOND;
+import static data.Properties.*;
 
 public class AuthorizationPage extends BasePage{
 
@@ -24,7 +23,7 @@ public class AuthorizationPage extends BasePage{
 
     public AuthorizationPage(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver,Duration.ofSeconds(10));
+        this.wait = new WebDriverWait(driver,Duration.ofSeconds(WAIT_SECOND));
         PageFactory.initElements(driver, this);
     }
 

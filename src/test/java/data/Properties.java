@@ -7,6 +7,7 @@ public class Properties {
     public static final String PATH_NOTE_2 = "/notes/";
     public static final String PATH_LOGIN = "api/login/";
     public static final int IMPLICITLY_WAIT_SECOND = 10;
+    public static final int WAIT_SECOND = 30;
     public static final String STANDARD_PASSWORD = "123";
 
 }

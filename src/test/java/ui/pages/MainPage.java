@@ -13,8 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.List;
 
-import static data.Properties.BASE_URI;
-import static data.Properties.IMPLICITLY_WAIT_SECOND;
+import static data.Properties.*;
 
 public class MainPage extends BasePage{
 
@@ -23,7 +22,7 @@ public class MainPage extends BasePage{
 
     public MainPage(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver,Duration.ofSeconds(10));
+        this.wait = new WebDriverWait(driver,Duration.ofSeconds(WAIT_SECOND));
         PageFactory.initElements(driver, this);
     }
 
@@ -118,6 +117,14 @@ public class MainPage extends BasePage{
         wait.until(ExpectedConditions.visibilityOf(notePopup));
     }
 
+    public void notePopupTitleShouldBeVisible() {
+        wait.until(ExpectedConditions.visibilityOf(notePopupTitleField));
+    }
+
+    public void notePopupContentShouldBeVisible() {
+        wait.until(ExpectedConditions.visibilityOf(notePopupContentField));
+    }
+
     public void fillInNoteTitle(String text) {
         notePopupTitleField.sendKeys(text);
     }
@@ -148,6 +155,10 @@ public class MainPage extends BasePage{
 
     public boolean isAddNoteButtonDisplayed() {
         return addNoteButton.isDisplayed();
+    }
+
+    public void addNoteButtonShouldBeVisible() {
+        wait.until(ExpectedConditions.visibilityOf(addNoteButton));
     }
 
     public void clickAddNoteButton() {

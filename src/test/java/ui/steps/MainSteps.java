@@ -7,11 +7,11 @@ import ui.tests.BaseTest;
 
 public class MainSteps {
 
-    private MainPage mainPage = new MainPage(BaseTest.driver);
+    private MainPage mainPage = new MainPage(BaseTest.driver.get());
 
     @Step("Проверяем, что главная страница открылась")
     public void checkThatMainPageOpen() {
-        Assert.assertEquals(true, mainPage.isAddNoteButtonDisplayed());
+        mainPage.addNoteButtonShouldBeVisible();
         Assert.assertEquals(true, mainPage.urlIsMainPage());
     }
 
@@ -28,6 +28,8 @@ public class MainSteps {
     @Step("Ждем, когда появится поп-ап заметки")
     public void notePopupShouldBeDisplayed() {
         mainPage.notePopupShouldBeDisplayed();
+        mainPage.notePopupTitleShouldBeVisible();
+        mainPage.notePopupContentShouldBeVisible();
     }
 
     @Step("Вводим текст {text} в поле ввода Заголовок заметки")

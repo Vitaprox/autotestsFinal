@@ -7,7 +7,7 @@ import ui.tests.BaseTest;
 
 public class AuthorizationSteps {
 
-    private AuthorizationPage authorizationPage = new AuthorizationPage(BaseTest.driver);
+    private AuthorizationPage authorizationPage = new AuthorizationPage(BaseTest.driver.get());
 
     @Step("Открываем страницу авторизации")
     public void openAuthorizationPage() {
